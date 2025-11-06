@@ -18,7 +18,7 @@ package uk.gov.hmrc.agentregistrationfrontend.controllers.apply.applicantcontact
 
 import play.api.libs.ws.DefaultBodyReadables.*
 import play.api.libs.ws.WSResponse
-
+import uk.gov.hmrc.agentregistration.shared.AgentApplicationLlp
 import uk.gov.hmrc.agentregistrationfrontend.forms.CompaniesHouseNameQueryForm
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.ControllerSpec
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.wiremock.stubs.AgentRegistrationStubs
@@ -36,11 +36,11 @@ extends ControllerSpec:
         .sectionContactDetails
         .whenApplicantIsAMember
 
-    val beforeNameQueryProvided =
+    val beforeNameQueryProvided: AgentApplicationLlp =
       whenApplicantIsAMember
         .afterRoleSelected
 
-    val afterNameQueryProvided =
+    val afterNameQueryProvided: AgentApplicationLlp =
       whenApplicantIsAMember
         .afterNameQueryProvided
 
@@ -62,6 +62,21 @@ extends ControllerSpec:
 
     response.status shouldBe Status.OK
     response.parseBodyAsJsoupDocument.title() shouldBe "What is your name? - Apply for an agent services account - GOV.UK"
+
+  s"GET $path when name has been stored already should return 200 and render page with previous answers filled in" in:
+    AuthStubs.stubAuthorise()
+    AgentRegistrationStubs.stubGetAgentApplication(agentApplication.afterNameQueryProvided)
+    val response: WSResponse = get(path)
+
+    response.status shouldBe Status.OK
+    val doc = response.parseBodyAsJsoupDocument
+    doc.title() shouldBe "What is your name? - Apply for an agent services account - GOV.UK"
+    doc.mainContent
+      .selectOrFail(s"input[name='${CompaniesHouseNameQueryForm.firstNameKey}']")
+      .attr("value") shouldBe agentApplication.whenApplicantIsAMember.firstNameQuery
+    doc.mainContent
+      .selectOrFail(s"input[name='${CompaniesHouseNameQueryForm.lastNameKey}']")
+      .attr("value") shouldBe agentApplication.whenApplicantIsAMember.lastNameQuery
 
   s"POST $path with first and last names should save data and redirect to the show name matches page" in:
     AuthStubs.stubAuthorise()

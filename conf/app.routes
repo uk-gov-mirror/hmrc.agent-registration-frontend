@@ -84,3 +84,5 @@ GET        /provide-details/internal/initiate-member-provide-details/:linkId/  u
 
 
 GET         /provide-details/name                                   uk.gov.hmrc.agentregistrationfrontend.controllers.providedetails.LlpMemberNameController.show
+POST        /provide-details/name                                   uk.gov.hmrc.agentregistrationfrontend.controllers.providedetails.LlpMemberNameController.submit
+GET         /provide-details/name-match                             uk.gov.hmrc.agentregistrationfrontend.controllers.providedetails.CompaniesHouseMatchingController.show

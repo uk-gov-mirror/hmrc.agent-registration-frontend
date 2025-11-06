@@ -65,6 +65,21 @@ extends ControllerSpec:
     response.status shouldBe Status.OK
     response.parseBodyAsJsoupDocument.title() shouldBe "If we need to speak to you about this application, what number do we call? - Apply for an agent services account - GOV.UK"
 
+  s"GET $path when telephone number has been stored already should return 200 and render page with the previous answer filled in" in:
+    AuthStubs.stubAuthorise()
+    AgentRegistrationStubs.stubGetAgentApplication(agentApplication.afterTelephoneNumberProvided)
+    val response: WSResponse = get(path)
+
+    response.status shouldBe Status.OK
+    val doc = response.parseBodyAsJsoupDocument
+    doc.title() shouldBe "If we need to speak to you about this application, what number do we call? - Apply for an agent services account - GOV.UK"
+    doc.mainContent
+      .selectOrFail(s"input[name='${TelephoneNumberForm.key}']")
+      .attr("value") shouldBe agentApplication
+      .afterTelephoneNumberProvided
+      .getApplicantContactDetails
+      .getTelephoneNumber.value
+
   s"POST $path with valid name should save data and redirect to check your answers" in:
     AuthStubs.stubAuthorise()
     AgentRegistrationStubs.stubGetAgentApplication(agentApplication.beforeTelephoneUpdate)

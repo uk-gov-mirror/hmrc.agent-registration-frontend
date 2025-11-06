@@ -16,13 +16,19 @@
 
 package uk.gov.hmrc.agentregistrationfrontend.controllers.providedetails
 
+import com.softwaremill.quicklens.modify
 import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.MessagesControllerComponents
-import play.api.mvc.RequestHeader
+import uk.gov.hmrc.agentregistration.shared.contactdetails.CompaniesHouseNameQuery
+import uk.gov.hmrc.agentregistration.shared.llp.CompaniesHouseMatch
 import uk.gov.hmrc.agentregistrationfrontend.action.Actions
+import uk.gov.hmrc.agentregistrationfrontend.action.FormValue
+import uk.gov.hmrc.agentregistrationfrontend.action.providedetails.llp.MemberProvideDetailsRequest
 import uk.gov.hmrc.agentregistrationfrontend.controllers.FrontendController
-import uk.gov.hmrc.agentregistrationfrontend.views.html.SimplePage
+import uk.gov.hmrc.agentregistrationfrontend.forms.CompaniesHouseNameQueryForm
+import uk.gov.hmrc.agentregistrationfrontend.services.llp.MemberProvideDetailsService
+import uk.gov.hmrc.agentregistrationfrontend.views.html.providedetails.LlpMemberNamePage
 
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -31,13 +37,34 @@ import javax.inject.Singleton
 class LlpMemberNameController @Inject() (
   actions: Actions,
   mcc: MessagesControllerComponents,
-  placeholder: SimplePage
+  view: LlpMemberNamePage,
+  memberProvideDetailsService: MemberProvideDetailsService
 )
 extends FrontendController(mcc, actions):
 
   def show: Action[AnyContent] = actions.getProvideDetailsInProgress:
-    implicit request: RequestHeader =>
-      Ok(placeholder(
-        h1 = "What is your name?",
-        bodyText = Some("This is a placeholder page for the LLP member name page.")
+    implicit request =>
+      Ok(view(
+        CompaniesHouseNameQueryForm.form
+          .fill:
+            request.memberProvidedDetails
+              .companiesHouseMatch
+              .map(_.memberNameQuery)
       ))
+
+  def submit: Action[AnyContent] = actions.getProvideDetailsInProgress
+    .ensureValidForm(CompaniesHouseNameQueryForm.form, implicit r => view(_))
+    .async:
+      implicit request: (MemberProvideDetailsRequest[AnyContent] & FormValue[CompaniesHouseNameQuery]) =>
+        val validFormData = request.formValue
+        memberProvideDetailsService
+          .upsert(
+            request.memberProvidedDetails
+              .modify(_.companiesHouseMatch)
+              .setTo(Some(CompaniesHouseMatch(
+                memberNameQuery = validFormData,
+                companiesHouseOfficer = None
+              )))
+          )
+          .map: _ =>
+            Redirect(AppRoutes.providedetails.CompaniesHouseMatchingController.show)

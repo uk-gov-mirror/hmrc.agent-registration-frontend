@@ -1,0 +1,73 @@
+@*
+ * Copyright 2025 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.agentregistration.shared.contactdetails.CompaniesHouseNameQuery
+@import uk.gov.hmrc.agentregistrationfrontend.action.AgentApplicationRequest
+@import uk.gov.hmrc.agentregistrationfrontend.forms.CompaniesHouseNameQueryForm
+@import uk.gov.hmrc.agentregistrationfrontend.controllers.providedetails.routes
+@import uk.gov.hmrc.agentregistrationfrontend.views.html.Layout
+@import uk.gov.hmrc.agentregistrationfrontend.views.html.apply.partials.ContinueOrSaveForLater
+@import uk.gov.hmrc.govukfrontend.views.html.components.implicits.RichInput
+
+@this(
+        layout: Layout,
+        govukInput: GovukInput,
+        formWithCSRF: FormWithCSRF,
+        govukButton: GovukButton,
+        continueOrSaveForLater: ContinueOrSaveForLater
+)
+
+@(form: Form[CompaniesHouseNameQuery])(implicit request: Request[?], messages: Messages)
+
+@key = @{
+    "llpMemberName"
+}
+@title = @{messages(s"$key.title")}
+@layout(
+    pageTitle = title,
+    maybeForm = Some(form)
+) {
+    <h2 class="govuk-caption-l">@messages("provide-details.llp.title")</h2>
+    <h1 class="govuk-heading-l">@title</h1>
+
+    <p class="govuk-body">@messages(
+        s"$key.p1",
+        "Hardcoded Partnership LLP"
+    )</p>
+    @formWithCSRF(action = routes.LlpMemberNameController.submit) {
+        @govukInput(Input(
+            label = Label(
+              content = Text(messages(s"$key.firstName.label")),
+              isPageHeading = false,
+              classes = "govuk-label--s"
+            ),
+            autocomplete = Some("given-name"),
+            classes = "govuk-!-width-two-thirds"
+        ).withFormField(form(CompaniesHouseNameQueryForm.firstNameKey)))
+
+        @govukInput(Input(
+            label = Label(
+                content = Text(messages(s"$key.lastName.label")),
+                isPageHeading = false,
+                classes = "govuk-label--s"
+            ),
+            autocomplete = Some("family-name"),
+            classes = "govuk-!-width-two-thirds"
+        ).withFormField(form(CompaniesHouseNameQueryForm.lastNameKey)))
+
+        @continueOrSaveForLater()
+    }
+}

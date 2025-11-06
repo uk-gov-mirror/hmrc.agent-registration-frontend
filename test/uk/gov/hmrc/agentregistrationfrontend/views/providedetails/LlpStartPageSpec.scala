@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.agentregistrationfrontend.views.apply.providedetails
+package uk.gov.hmrc.agentregistrationfrontend.views.providedetails
 
 import com.softwaremill.quicklens.modify
 import org.jsoup.Jsoup

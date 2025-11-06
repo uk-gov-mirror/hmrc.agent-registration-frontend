@@ -316,3 +316,6 @@ llpProvideDetailsStart.info.li2 = carry out some checks on your tax and financia
 llpProvideDetailsStart.signIn.h2 = Use the right sign in details
 llpProvideDetailsStart.signIn.p1 = We need you to sign in using sign in details you created for your personal taxes, not your business taxes.
 llpProvideDetailsStart.signIn.p2 = If you do not have personal sign in details, you can create some.
+
+
+provide-details.llp.title = LLP member confirmation

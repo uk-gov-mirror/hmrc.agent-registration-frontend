@@ -31,12 +31,14 @@ final case class MemberProvidedDetails(
   internalUserId: InternalUserId,
   createdAt: Instant,
   providedDetailsState: ProvidedDetailsState,
-  applicationId: AgentApplicationId
+  applicationId: AgentApplicationId,
+  companiesHouseMatch: Option[CompaniesHouseMatch] = None
 ):
 
   val memberProvidedDetailsId: MemberProvidedDetailsId = _id
   val hasFinished: Boolean = if providedDetailsState === Finished then true else false
   val isInProgress: Boolean = !hasFinished
+  def maybeCompaniesHouseMatch: Option[CompaniesHouseMatch] = companiesHouseMatch
 
 object MemberProvidedDetails:
   given format: OFormat[MemberProvidedDetails] = Json.format[MemberProvidedDetails]

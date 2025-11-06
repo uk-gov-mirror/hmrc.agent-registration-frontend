@@ -77,3 +77,4 @@ object AppRoutes:
 
     val StartController = providedetailsRoutes.StartController
     val LlpMemberNameController = providedetailsRoutes.LlpMemberNameController
+    val CompaniesHouseMatchingController = providedetailsRoutes.CompaniesHouseMatchingController

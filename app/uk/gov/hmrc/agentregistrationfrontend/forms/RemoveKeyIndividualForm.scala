@@ -26,11 +26,13 @@ object RemoveKeyIndividualForm:
 
   val key: String = "removeKeyIndividual"
   def form(individualName: String): Form[YesNo] =
-    val fieldMapping: FieldMapping[YesNo] = Forms.of(FormatterFactory.makeEnumFormatter[YesNo](
-      errorMessageIfMissing = s"$key.error.required",
-      errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(key),
-      missingArgs = Seq(individualName)
-    ))
+    val fieldMapping: FieldMapping[YesNo] = Forms.of(using
+      FormatterFactory.makeEnumFormatter[YesNo](
+        errorMessageIfMissing = s"$key.error.required",
+        errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(key),
+        missingArgs = Seq(individualName)
+      )
+    )
     Form(
       mapping =
         Forms.mapping(

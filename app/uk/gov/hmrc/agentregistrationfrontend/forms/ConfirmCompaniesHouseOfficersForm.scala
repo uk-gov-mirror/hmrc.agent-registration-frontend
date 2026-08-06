@@ -28,10 +28,12 @@ object ConfirmCompaniesHouseOfficersForm:
 
   val isCompaniesHouseOfficersListCorrect: String = "isCompaniesHouseOfficersListCorrect"
 
-  private val yesNoMapping: FieldMapping[YesNo] = Forms.of(FormatterFactory.makeEnumFormatter[YesNo](
-    errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(isCompaniesHouseOfficersListCorrect),
-    errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(isCompaniesHouseOfficersListCorrect)
-  ))
+  private val yesNoMapping: FieldMapping[YesNo] = Forms.of(using
+    FormatterFactory.makeEnumFormatter[YesNo](
+      errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(isCompaniesHouseOfficersListCorrect),
+      errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(isCompaniesHouseOfficersListCorrect)
+    )
+  )
 
   val form: Form[Boolean] = Form(
     mapping(

@@ -19,8 +19,6 @@ package uk.gov.hmrc.agentregistrationfrontend.views.individual
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
-import uk.gov.hmrc.agentregistration.shared.individual.IndividualProvidedDetails
-
 import uk.gov.hmrc.agentregistrationfrontend.forms.IndividualEmailAddressForm
 import uk.gov.hmrc.agentregistrationfrontend.model.SubmitAction.SaveAndContinue
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.ViewSpec
@@ -31,10 +29,6 @@ extends ViewSpec:
 
   private val viewTemplate: IndividualEmailAddressPage = app.injector.instanceOf[IndividualEmailAddressPage]
   private val linkId = tdAll.linkId
-
-  private object memberProvidedDetails:
-
-    val beforeEmailAddressProvided: IndividualProvidedDetails = tdAll.providedDetails.afterTelephoneNumberProvided
 
   val doc: Document = Jsoup.parse(viewTemplate(IndividualEmailAddressForm.form, linkId).body)
   private val heading: String = "What is your email address?"

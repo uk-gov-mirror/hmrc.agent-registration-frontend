@@ -31,7 +31,7 @@ object OtherRelevantIndividualNameForm:
 
   val form: Form[IndividualName] = Form[IndividualName](
     mapping(
-      key -> Forms.of(TextFormatter(ErrorKeys.requiredFieldErrorMessage(key)))
+      key -> Forms.of(using TextFormatter(ErrorKeys.requiredFieldErrorMessage(key)))
         .transform[String](canonicalise, identity)
         .verifying(
           ErrorKeys.requiredFieldErrorMessage(key),

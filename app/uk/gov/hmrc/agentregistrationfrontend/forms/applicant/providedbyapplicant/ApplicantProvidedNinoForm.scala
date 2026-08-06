@@ -39,7 +39,7 @@ object ApplicantProvidedNinoForm:
 
   val form: Form[UserProvidedNino] = Form(
     mapping(
-      hasNino -> Forms.of(TextFormatter(ErrorKeys.requiredFieldErrorMessage(hasNino)))
+      hasNino -> Forms.of(using TextFormatter(ErrorKeys.requiredFieldErrorMessage(hasNino)))
         .verifying(
           ErrorKeys.requiredFieldErrorMessage(hasNino),
           _.nonEmpty

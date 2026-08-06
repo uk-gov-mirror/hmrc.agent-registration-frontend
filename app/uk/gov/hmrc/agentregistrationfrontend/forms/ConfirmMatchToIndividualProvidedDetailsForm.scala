@@ -27,10 +27,12 @@ object ConfirmMatchToIndividualProvidedDetailsForm:
   val key: String = "confirmMatchToIndividualProvidedDetails"
 
   def form: Form[YesNo] =
-    val fieldMapping: FieldMapping[YesNo] = Forms.of(FormatterFactory.makeEnumFormatter[YesNo](
-      errorMessageIfMissing = s"$key.error.required",
-      errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(key)
-    ))
+    val fieldMapping: FieldMapping[YesNo] = Forms.of(using
+      FormatterFactory.makeEnumFormatter[YesNo](
+        errorMessageIfMissing = s"$key.error.required",
+        errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(key)
+      )
+    )
     Form(
       mapping =
         Forms.mapping(

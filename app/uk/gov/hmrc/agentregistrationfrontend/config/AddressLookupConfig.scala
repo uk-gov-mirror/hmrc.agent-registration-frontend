@@ -65,28 +65,28 @@ class AddressLookupConfig @Inject() (
       "labels" -> Json.obj(
         "en" -> Json.obj(
           "appLevelLabels" -> Json.obj(
-            "navTitle" -> messagesApi("service.name")(AppLangs.en)
+            "navTitle" -> messagesApi("service.name")(using AppLangs.en)
           ),
           "lookupPageLabels" -> Json.obj(
-            "title" -> messagesApi("address.lookup.title")(AppLangs.en),
-            "heading" -> messagesApi("address.lookup.header")(AppLangs.en)
+            "title" -> messagesApi("address.lookup.title")(using AppLangs.en),
+            "heading" -> messagesApi("address.lookup.header")(using AppLangs.en)
           ),
           "editPageLabels" -> Json.obj(
-            "title" -> messagesApi("address.lookup.editPageLabels.title")(AppLangs.en),
-            "heading" -> messagesApi("address.lookup.editPageLabels.header")(AppLangs.en)
+            "title" -> messagesApi("address.lookup.editPageLabels.title")(using AppLangs.en),
+            "heading" -> messagesApi("address.lookup.editPageLabels.header")(using AppLangs.en)
           )
         ),
         "cy" -> Json.obj(
           "appLevelLabels" -> Json.obj(
-            "navTitle" -> messagesApi("service.name")(AppLangs.cy)
+            "navTitle" -> messagesApi("service.name")(using AppLangs.cy)
           ),
           "lookupPageLabels" -> Json.obj(
-            "title" -> messagesApi("address.lookup.title")(AppLangs.cy),
-            "heading" -> messagesApi("address.lookup.header")(AppLangs.cy)
+            "title" -> messagesApi("address.lookup.title")(using AppLangs.cy),
+            "heading" -> messagesApi("address.lookup.header")(using AppLangs.cy)
           ),
           "editPageLabels" -> Json.obj(
-            "title" -> messagesApi("address.lookup.editPageLabels.title")(AppLangs.cy),
-            "heading" -> messagesApi("address.lookup.editPageLabels.header")(AppLangs.cy)
+            "title" -> messagesApi("address.lookup.editPageLabels.title")(using AppLangs.cy),
+            "heading" -> messagesApi("address.lookup.editPageLabels.header")(using AppLangs.cy)
           )
         )
       )

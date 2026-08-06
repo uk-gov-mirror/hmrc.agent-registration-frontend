@@ -31,6 +31,8 @@ import uk.gov.hmrc.crypto.PlainText
 import uk.gov.hmrc.http.SessionKeys
 import uk.gov.hmrc.play.bootstrap.frontend.filters.crypto.SessionCookieCrypto
 
+import scala.annotation.nowarn
+
 trait WsHelper:
   self: ISpec =>
 
@@ -100,6 +102,7 @@ trait WsHelper:
 
   val baseUrl: String = "/agent-registration"
 
+  @nowarn
   private def buildUnauthenticatedClient(
     path: String,
     cookies: Seq[WSCookie] = Seq.empty
@@ -110,6 +113,7 @@ trait WsHelper:
       .withCookies(cookies*)
   }
 
+  @nowarn
   private def buildClient(
     path: String,
     cookies: Seq[WSCookie] = Seq.empty

@@ -64,7 +64,7 @@ extends ControllerSpec:
         httpClient
           .post(
             url"${thisFrontendBaseUrl + AppRoutes.apply.amls.api.NotificationFromUpscanController.processNotificationFromUpscan(tdAll.uploadId).url}"
-          )(tdAll.headerCarrier)
+          )(using tdAll.headerCarrier)
           .withBody(tdAll.uploadNotificationRequestSucceededJson)
           .execute[HttpResponse]
           .futureValue

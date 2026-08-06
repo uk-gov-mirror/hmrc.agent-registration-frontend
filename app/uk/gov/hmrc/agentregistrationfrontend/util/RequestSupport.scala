@@ -36,9 +36,9 @@ import javax.inject.Inject
   */
 class RequestSupport @Inject() (i18nSupport: I18nSupport):
 
-  def lang(using requestHeader: RequestHeader): Lang = i18nSupport.request2Messages(requestHeader).lang
+  def lang(using requestHeader: RequestHeader): Lang = i18nSupport.request2Messages(using requestHeader).lang
 
-  given legacyMessages(using requestHeader: RequestHeader): Messages = i18nSupport.request2Messages(requestHeader)
+  given legacyMessages(using requestHeader: RequestHeader): Messages = i18nSupport.request2Messages(using requestHeader)
 
   given hc(using request: RequestHeader): HeaderCarrier = RequestSupport.hc
 
@@ -68,4 +68,4 @@ object RequestSupport:
     */
   private object HcProvider
   extends FrontendHeaderCarrierProvider:
-    def headerCarrier(using request: RequestHeader): HeaderCarrier = this.hc(request)
+    def headerCarrier(using request: RequestHeader): HeaderCarrier = this.hc(using request)

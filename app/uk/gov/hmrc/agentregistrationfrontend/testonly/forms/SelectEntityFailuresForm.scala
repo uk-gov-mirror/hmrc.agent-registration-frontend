@@ -38,7 +38,7 @@ object SelectEntityFailuresForm:
 
   def apply(agentApplication: AgentApplication): Form[Seq[EntityRiskingFailure]] = Form(
     single(
-      key -> seq(of(FormatterFactory.makeEnumFormatter[EntityRiskingFailure]()))
+      key -> seq(of(using FormatterFactory.makeEnumFormatter[EntityRiskingFailure]()))
         .verifying(
           "Only one AMLS (Check 3) failure can be selected at a time.",
           failures => failures.count(_.checkId === "3") <= 1

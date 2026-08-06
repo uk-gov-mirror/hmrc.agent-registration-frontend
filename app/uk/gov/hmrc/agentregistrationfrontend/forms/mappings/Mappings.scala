@@ -27,11 +27,13 @@ import java.time.LocalDate
 
 object Mappings:
 
-  def text(formMessageKey: String): Mapping[String] = of(TextFormatter(
-    errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(formMessageKey)
-  ))
+  def text(formMessageKey: String): Mapping[String] = of(using
+    TextFormatter(
+      errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(formMessageKey)
+    )
+  )
 
-  def localDate(formMessageKey: String): Mapping[LocalDate] = of(LocalDateFormatter(formMessageKey))
+  def localDate(formMessageKey: String): Mapping[LocalDate] = of(using LocalDateFormatter(formMessageKey))
 
   def textFromOptions(
     formMessageKey: String,

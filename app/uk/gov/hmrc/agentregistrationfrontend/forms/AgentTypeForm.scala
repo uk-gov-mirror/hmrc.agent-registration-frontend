@@ -28,10 +28,12 @@ object AgentTypeForm:
 
   val key: String = "agentType"
   val form: Form[AgentType] =
-    val fieldMapping: FieldMapping[AgentType] = Forms.of(FormatterFactory.makeEnumFormatter[AgentType](
-      errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(key),
-      errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(key)
-    ))
+    val fieldMapping: FieldMapping[AgentType] = Forms.of(using
+      FormatterFactory.makeEnumFormatter[AgentType](
+        errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(key),
+        errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(key)
+      )
+    )
     Form(
       mapping = mapping(key -> fieldMapping)(identity)(Some(_))
     )

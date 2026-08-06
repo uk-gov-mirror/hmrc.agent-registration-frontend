@@ -29,10 +29,12 @@ object TypeOfSignInForm:
   val key: String = "typeOfSignIn"
 
   val form: Form[TypeOfSignIn] =
-    val fieldMapping: FieldMapping[TypeOfSignIn] = Forms.of(FormatterFactory.makeEnumFormatter[TypeOfSignIn](
-      errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(key),
-      errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(key)
-    ))
+    val fieldMapping: FieldMapping[TypeOfSignIn] = Forms.of(using
+      FormatterFactory.makeEnumFormatter[TypeOfSignIn](
+        errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(key),
+        errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(key)
+      )
+    )
     Form(
       mapping = mapping(key -> fieldMapping)(identity)(Some(_))
     )

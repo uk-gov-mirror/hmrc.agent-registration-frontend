@@ -23,12 +23,14 @@ import uk.gov.hmrc.agentregistrationfrontend.testsupport.RichMatchers.*
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.viewspecsupport.JsoupHelper.*
 
 import scala.language.implicitConversions
+import scala.annotation.nowarn
 
 object ElementSupport:
 
   extension (element: Element)
 
     inline def selectOrFail(selector: String)(using pos: Position): Elements =
+      @nowarn
       val positionInfo = s"at (${pos.fileName}:${pos.lineNumber})"
       val elements: Elements = element.select(selector)
       if elements.isEmpty then

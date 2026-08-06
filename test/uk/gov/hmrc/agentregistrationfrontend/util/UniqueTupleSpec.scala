@@ -19,10 +19,9 @@ package uk.gov.hmrc.agentregistrationfrontend.util
 import uk.gov.hmrc.agentregistration.shared.InternalUserId
 import uk.gov.hmrc.agentregistration.shared.Nino
 import uk.gov.hmrc.agentregistration.shared.SaUtr
+import scala.compiletime.testing.*
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.UnitSpec
 import uk.gov.hmrc.agentregistrationfrontend.util.UniqueTuple.*
-
-import scala.compiletime.testing.typeCheckErrors
 
 class UniqueTupleSpec
 extends UnitSpec:

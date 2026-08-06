@@ -4,7 +4,7 @@ val playPort: Int = 22201
 PlayKeys.playRunHooks += PlayRunHook(playPort)
 
 ThisBuild / majorVersion := 0
-ThisBuild / scalaVersion := "3.6.1"
+ThisBuild / scalaVersion := "3.7.0"
 ThisBuild / scalafmtOnCompile := true
 ThisBuild / semanticdbEnabled := true
 ThisBuild / scalafixOnCompile := true

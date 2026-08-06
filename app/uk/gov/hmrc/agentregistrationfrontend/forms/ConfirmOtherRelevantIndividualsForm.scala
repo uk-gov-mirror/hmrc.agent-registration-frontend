@@ -28,10 +28,12 @@ object ConfirmOtherRelevantIndividualsForm:
 
   val hasOtherRelevantIndividuals: String = "hasOtherRelevantIndividuals"
 
-  private val yesNoMapping: FieldMapping[YesNo] = Forms.of(FormatterFactory.makeEnumFormatter[YesNo](
-    errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(hasOtherRelevantIndividuals),
-    errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(hasOtherRelevantIndividuals)
-  ))
+  private val yesNoMapping: FieldMapping[YesNo] = Forms.of(using
+    FormatterFactory.makeEnumFormatter[YesNo](
+      errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(hasOtherRelevantIndividuals),
+      errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(hasOtherRelevantIndividuals)
+    )
+  )
 
   val form: Form[Boolean] = Form(
     mapping(

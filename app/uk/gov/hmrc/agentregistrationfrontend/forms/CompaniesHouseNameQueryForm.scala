@@ -32,7 +32,7 @@ object CompaniesHouseNameQueryForm:
 
   val form: Form[CompaniesHouseNameQuery] = Form[CompaniesHouseNameQuery](
     mapping(
-      firstNameKey -> Forms.of(TextFormatter(ErrorKeys.requiredFieldErrorMessage(firstNameKey)))
+      firstNameKey -> Forms.of(using TextFormatter(ErrorKeys.requiredFieldErrorMessage(firstNameKey)))
         .transform[String](canonicalise, identity)
         .verifying(
           ErrorKeys.requiredFieldErrorMessage(firstNameKey),
@@ -42,7 +42,7 @@ object CompaniesHouseNameQueryForm:
           ErrorKeys.invalidInputErrorMessage(firstNameKey),
           _.matches(nameRegex)
         ),
-      lastNameKey -> Forms.of(TextFormatter(ErrorKeys.requiredFieldErrorMessage(lastNameKey)))
+      lastNameKey -> Forms.of(using TextFormatter(ErrorKeys.requiredFieldErrorMessage(lastNameKey)))
         .transform[String](canonicalise, identity)
         .verifying(
           ErrorKeys.requiredFieldErrorMessage(lastNameKey),

@@ -29,6 +29,6 @@ object SelectIndividualFailuresForm:
 
   val form: Form[Seq[IndividualRiskingFailure]] = Form(
     single(
-      key -> seq(of(FormatterFactory.makeEnumFormatter[IndividualRiskingFailure]()))
+      key -> seq(of(using FormatterFactory.makeEnumFormatter[IndividualRiskingFailure]()))
     )
   )

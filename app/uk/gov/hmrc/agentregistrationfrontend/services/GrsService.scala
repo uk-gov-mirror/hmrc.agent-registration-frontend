@@ -61,8 +61,8 @@ class GrsService @Inject() (
     includeNamePageLabel: Boolean
   ): JourneyConfig = {
 
-    val fullNamePageLabel: Option[String] = if includeNamePageLabel then messagesApi.translate("grs.optFullNamePageLabel", Nil)(Lang("en")) else None
-    val welshFullNamePageLabel: Option[String] = if includeNamePageLabel then messagesApi.translate("grs.optFullNamePageLabel", Nil)(Lang("cy")) else None
+    val fullNamePageLabel: Option[String] = if includeNamePageLabel then messagesApi.translate("grs.optFullNamePageLabel", Nil)(using Lang("en")) else None
+    val welshFullNamePageLabel: Option[String] = if includeNamePageLabel then messagesApi.translate("grs.optFullNamePageLabel", Nil)(using Lang("cy")) else None
 
     JourneyConfig(
       continueUrl = AppRoutes.apply.internal.GrsController.journeyCallback(None).url,
@@ -73,11 +73,11 @@ class GrsService @Inject() (
       businessVerificationCheck = false,
       labels = Some(JourneyLabels(
         en = TranslationLabels(
-          optServiceName = messagesApi.translate("service.name", Nil)(AppLangs.en),
+          optServiceName = messagesApi.translate("service.name", Nil)(using AppLangs.en),
           optFullNamePageLabel = fullNamePageLabel
         ),
         cy = TranslationLabels(
-          optServiceName = messagesApi.translate("service.name", Nil)(AppLangs.cy),
+          optServiceName = messagesApi.translate("service.name", Nil)(using AppLangs.cy),
           optFullNamePageLabel = welshFullNamePageLabel
         )
       ))

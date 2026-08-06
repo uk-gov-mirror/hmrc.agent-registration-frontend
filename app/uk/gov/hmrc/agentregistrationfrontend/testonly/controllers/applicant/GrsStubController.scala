@@ -135,10 +135,12 @@ extends FrontendController(mcc, actions):
   def randomNino(): Nino = Nino(ninoGenerator.nextNino.nino)
 
   private def form(businessType: BusinessType): Form[JourneyData] =
-    val registrationStatusMapping: FieldMapping[RegistrationStatus] = Forms.of(FormatterFactory.makeEnumFormatter[RegistrationStatus](
-      errorMessageIfMissing = "Registration status required",
-      errorMessageIfEnumError = "Registration status invalid"
-    ))
+    val registrationStatusMapping: FieldMapping[RegistrationStatus] = Forms.of(using
+      FormatterFactory.makeEnumFormatter[RegistrationStatus](
+        errorMessageIfMissing = "Registration status required",
+        errorMessageIfEnumError = "Registration status invalid"
+      )
+    )
 
     def sautrMapping(businessType: BusinessType): play.api.data.Mapping[Option[String]] =
       val partnershipTypes = Seq(

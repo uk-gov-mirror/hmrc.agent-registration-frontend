@@ -39,7 +39,7 @@ object SaUtrForm:
 
   val form: Form[UserProvidedSaUtr] = Form(
     mapping(
-      hasSaUtrKey -> Forms.of(TextFormatter(ErrorKeys.requiredFieldErrorMessage(hasSaUtrKey)))
+      hasSaUtrKey -> Forms.of(using TextFormatter(ErrorKeys.requiredFieldErrorMessage(hasSaUtrKey)))
         .verifying(
           ErrorKeys.requiredFieldErrorMessage(hasSaUtrKey),
           _.nonEmpty

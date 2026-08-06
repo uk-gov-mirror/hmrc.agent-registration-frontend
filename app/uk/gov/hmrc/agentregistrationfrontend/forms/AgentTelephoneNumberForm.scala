@@ -36,7 +36,7 @@ object AgentTelephoneNumberForm:
   val form: Form[AgentTelephoneNumber] = Form(
     mapping =
       mapping(
-        key -> Forms.of(TextFormatter(ErrorKeys.requiredFieldErrorMessage(key)))
+        key -> Forms.of(using TextFormatter(ErrorKeys.requiredFieldErrorMessage(key)))
           .verifying(
             ErrorKeys.requiredFieldErrorMessage(key),
             _.nonEmpty

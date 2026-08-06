@@ -28,10 +28,12 @@ object PartnershipTypeForm:
 
   val key: String = "partnershipType"
   val form: Form[BusinessType.Partnership] =
-    val fieldMapping: FieldMapping[BusinessType.Partnership] = Forms.of(FormatterFactory.makeSealedObjectsFormatter[BusinessType.Partnership](
-      errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(key),
-      errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(key)
-    ))
+    val fieldMapping: FieldMapping[BusinessType.Partnership] = Forms.of(using
+      FormatterFactory.makeSealedObjectsFormatter[BusinessType.Partnership](
+        errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(key),
+        errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(key)
+      )
+    )
     Form(
       mapping = mapping(key -> fieldMapping)(identity)(Some(_))
     )

@@ -42,9 +42,11 @@ object NumberOfKeyIndividualsForm:
 
   val form: Form[NumberOfRequiredKeyIndividuals] = Form(
     mapping = (mapping(
-      howManyIndividualsOption -> Forms.of(FormatterFactory.makeEnumFormatter[HowManyIndividualsOption](
-        errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(howManyIndividualsOption)
-      )),
+      howManyIndividualsOption -> Forms.of(using
+        FormatterFactory.makeEnumFormatter[HowManyIndividualsOption](
+          errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(howManyIndividualsOption)
+        )
+      ),
       howManyIndividuals -> mandatoryIf(
         isEqual(howManyIndividualsOption, HowManyIndividualsOption.FiveOrLess.toString),
         numberFromString(howManyIndividuals)

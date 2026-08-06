@@ -77,7 +77,7 @@ extends Connector:
     (
       (__ \ "name").read[String] and
         (__ \ "date_of_birth").readNullable[CompaniesHouseDateOfBirth] and
-        (__ \ "resigned_on").readNullable[LocalDate](Reads.localDateReads("yyyy-MM-dd")) and
+        (__ \ "resigned_on").readNullable[LocalDate](using Reads.localDateReads("yyyy-MM-dd")) and
         (__ \ "officer_role").readNullable[CompaniesHouseOfficerRole] and
         (__ \ "identification").readNullable[CompaniesHouseOfficerIdentification]
     )(CompaniesHouseOfficer.apply)

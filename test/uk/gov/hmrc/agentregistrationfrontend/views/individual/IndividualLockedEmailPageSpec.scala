@@ -19,8 +19,6 @@ package uk.gov.hmrc.agentregistrationfrontend.views.individual
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
-import uk.gov.hmrc.agentregistration.shared.individual.IndividualProvidedDetails
-
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.ViewSpec
 import uk.gov.hmrc.agentregistrationfrontend.views.html.individual.IndividualEmailLockedPage
 
@@ -29,10 +27,6 @@ extends ViewSpec:
 
   val individualLockedEmailPage: IndividualEmailLockedPage = app.injector.instanceOf[IndividualEmailLockedPage]
   private val linkId = tdAll.linkId
-
-  private object individualProvidedDetails:
-
-    val afterEmailAddressProvided: IndividualProvidedDetails = tdAll.providedDetails.afterEmailAddressProvided
 
   val doc: Document = Jsoup.parse(
     individualLockedEmailPage(linkId).body

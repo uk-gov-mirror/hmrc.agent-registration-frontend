@@ -27,7 +27,6 @@ import uk.gov.hmrc.agentregistrationfrontend.action.applicant.ApplicantAuthRefin
 import uk.gov.hmrc.agentregistrationfrontend.controllers.applicant.FrontendController
 import uk.gov.hmrc.agentregistrationfrontend.model.grs.JourneyData
 import uk.gov.hmrc.agentregistrationfrontend.services.applicant.AgentRegistrationRiskingService
-import uk.gov.hmrc.agentregistrationfrontend.testonly.model.CompletedSection.*
 import uk.gov.hmrc.agentregistrationfrontend.testonly.model.CompletedSection
 import uk.gov.hmrc.agentregistrationfrontend.testonly.model.PlanetId
 import uk.gov.hmrc.agentregistrationfrontend.testonly.model.SafeIdGenerator
@@ -37,7 +36,6 @@ import uk.gov.hmrc.agentregistrationfrontend.testonly.services.GrsStubService
 import uk.gov.hmrc.agentregistrationfrontend.testonly.services.StubUserService
 import uk.gov.hmrc.agentregistrationfrontend.testonly.util.InternalUserIdGenerator
 import uk.gov.hmrc.agentregistrationfrontend.testonly.views.html.FastForwardPage
-import uk.gov.hmrc.agentregistrationfrontend.testsupport.testdata
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.testdata.TdTestOnly
 
 import java.time.Clock

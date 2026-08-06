@@ -38,7 +38,7 @@ object IndividualNinoForm:
 
   val form: Form[UserProvidedNino] = Form(
     mapping(
-      hasNinoKey -> Forms.of(TextFormatter(ErrorKeys.requiredFieldErrorMessage(hasNinoKey)))
+      hasNinoKey -> Forms.of(using TextFormatter(ErrorKeys.requiredFieldErrorMessage(hasNinoKey)))
         .verifying(
           ErrorKeys.requiredFieldErrorMessage(hasNinoKey),
           _.nonEmpty

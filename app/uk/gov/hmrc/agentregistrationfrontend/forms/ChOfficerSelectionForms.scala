@@ -36,17 +36,19 @@ object ChOfficerSelectionForms:
   val formType: Form[ChOfficerSelectionFormType] = Form(
     mapping =
       Forms.mapping(
-        ChOfficerSelectionFormType.key -> Forms.of(FormatterFactory.makeEnumFormatter[ChOfficerSelectionFormType]())
+        ChOfficerSelectionFormType.key -> Forms.of(using FormatterFactory.makeEnumFormatter[ChOfficerSelectionFormType]())
       )(identity)(Some(_))
   )
 
   val key: String = "companiesHouseOfficer"
 
   val yesNoForm: Form[YesNo] =
-    val fieldMapping: FieldMapping[YesNo] = Forms.of(FormatterFactory.makeEnumFormatter[YesNo](
-      errorMessageIfMissing = s"$key.single.error.required",
-      errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(ChOfficerSelectionForms.key)
-    ))
+    val fieldMapping: FieldMapping[YesNo] = Forms.of(using
+      FormatterFactory.makeEnumFormatter[YesNo](
+        errorMessageIfMissing = s"$key.single.error.required",
+        errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(ChOfficerSelectionForms.key)
+      )
+    )
     Form(
       mapping =
         Forms.mapping(

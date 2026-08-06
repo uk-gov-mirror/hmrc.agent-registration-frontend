@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.agentregistrationfrontend.controllers.applicant.aboutyourbusiness
 
-import org.scalatest.matchers.should.Matchers.shouldBe
 import play.api.libs.ws.WSResponse
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.ControllerSpec
 

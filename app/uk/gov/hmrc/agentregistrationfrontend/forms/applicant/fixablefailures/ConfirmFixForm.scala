@@ -30,10 +30,12 @@ object ConfirmFixForm:
   val key: String = "isFixed"
 
   def form(failureCode: String): Form[Boolean] =
-    val yesNoMapping: FieldMapping[YesNo] = Forms.of(FormatterFactory.makeEnumFormatter[YesNo](
-      errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(s"$key.$failureCode"),
-      errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(s"$key.$failureCode")
-    ))
+    val yesNoMapping: FieldMapping[YesNo] = Forms.of(using
+      FormatterFactory.makeEnumFormatter[YesNo](
+        errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(s"$key.$failureCode"),
+        errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(s"$key.$failureCode")
+      )
+    )
     Form(
       mapping(
         key -> yesNoMapping

@@ -68,6 +68,7 @@ extends Connector:
 
   def createIndividualUserForDeceasedCheck(
     nino: Nino,
+    assignedPrincipalEnrolments: Seq[String],
     deceased: Boolean = false
   )(using
     request: RequestHeader

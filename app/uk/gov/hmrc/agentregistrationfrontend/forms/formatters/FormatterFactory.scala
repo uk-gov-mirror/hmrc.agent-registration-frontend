@@ -31,7 +31,7 @@ object FormatterFactory:
     errorMessageIfEnumError: String = "invalid input",
     missingArgs: => Seq[Any] = Nil,
     enumErrorArgs: => Seq[Any] = Nil
-  ): Formatter[E] = makeFormatter[E](
+  )(using classTag: ClassTag[E]): Formatter[E] = makeFormatter[E](
     errorMessageIfMissing,
     errorMessageIfEnumError,
     EnumValues.all[E],

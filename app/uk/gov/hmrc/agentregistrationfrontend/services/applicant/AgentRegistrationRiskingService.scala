@@ -105,7 +105,8 @@ object AgentRegistrationRiskingServiceHelper:
     crn =
       agentApplication match
         case a: IsIncorporated => Some(a.getCrn)
-        case a: IsNotIncorporated => None,
+        case a: IsNotIncorporated => None
+    ,
     utr = agentApplication.getUtr,
     safeId = agentApplication.getSafeId,
     arn = arn

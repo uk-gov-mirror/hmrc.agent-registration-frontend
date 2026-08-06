@@ -24,7 +24,6 @@ import uk.gov.hmrc.agentregistration.shared.risking.RiskingProgress
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.testdata.TdAll.tdAll
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.wiremock.stubs.AgentRegistrationRiskingStubs
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.wiremock.stubs.AgentRegistrationStubs
-import uk.gov.hmrc.agentregistrationfrontend.testsupport.wiremock.stubs.AuditStubs
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.wiremock.stubs.CitizenDetailsStub
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.wiremock.stubs.providedetails.IndividualAuthStubs
 import uk.gov.hmrc.agentregistrationfrontend.testsupport.wiremock.stubs.providedetails.llp.AgentRegistrationIndividualProvidedDetailsStubs
@@ -124,12 +123,11 @@ object ProvideDetailsStubHelper:
     then AgentRegistrationStubs.verifyGetApplicationBusinessPartnerRecord(utr = tdAll.saUtr.asUtr)
     else ()
 
-  def verifyAuthAndFindApplicationAndProvideDetailsWithIndividualSubmissionAuditEvent(): Unit =
+  def verifyAuthAndFindApplicationAndProvideDetailsSoleTrader(): Unit =
     IndividualAuthStubs.verifyAuthorise()
     AgentRegistrationIndividualProvidedDetailsStubs.verifyFindAllForApplicationId(tdAll.agentApplicationId, 2)
     AgentRegistrationStubs.verifyFindApplicationByLinkId(tdAll.linkId)
     AgentRegistrationIndividualProvidedDetailsStubs.verifyUpsertIndividualProvidedDetails()
-    AuditStubs.verifyAuditEvent(auditType = "IndividualSubmission")
 
   def verifyAuthAndUpdateProvidedDetails(): Unit =
     verifyAuthAndFindApplicationAndProvidedDetails()

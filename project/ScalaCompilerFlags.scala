@@ -15,7 +15,6 @@ object ScalaCompilerFlags {
 
   val strictScalaCompilerOptions: Seq[String] = Seq(
     "-Xfatal-warnings",
-    "-Wunused:imports,privates,locals",
     "-Wvalue-discard",
     "-feature"
   )

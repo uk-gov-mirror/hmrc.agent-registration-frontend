@@ -73,7 +73,7 @@ extends FrontendController(mcc, actions):
             includeNamePageLabel =
               request.agentApplication match
                 case a: AgentApplicationSoleTrader => a.userRole.contains(UserRole.Authorised)
-                case a: IsNotSoleTrader => false
+                case _: IsNotSoleTrader => false
           )
           .map(journeyStartUrl => Redirect(journeyStartUrl.value))
 

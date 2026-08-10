@@ -22,8 +22,10 @@ import uk.gov.hmrc.agentregistration.shared.util.SafeEquals.===
 import uk.gov.hmrc.agentregistration.shared.util.EnumValues
 import uk.gov.hmrc.agentregistration.shared.util.SealedObjects
 
+import scala.annotation.nowarn
 import scala.reflect.ClassTag
 
+@nowarn("msg=unused.*parameter")
 object FormatterFactory:
 
   inline def makeEnumFormatter[E <: reflect.Enum](

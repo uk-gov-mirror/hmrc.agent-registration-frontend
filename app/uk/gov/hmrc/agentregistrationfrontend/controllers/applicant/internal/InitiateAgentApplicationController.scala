@@ -82,7 +82,7 @@ extends FrontendController(mcc, actions):
           case Some(application) if application.isGrsDataReceived =>
             logger.info("Application already has GRS data, redirecting to next check")
             Future.successful(Redirect(nextCheckIfApplicationHasGrsData))
-          case Some(application) =>
+          case Some(_) =>
             logger.info("Application found without GRS data, throwing away. Creating a new application and redirecting to GRS journey.")
             given RequestWithDataCt[AnyContent, DataWithAuth] = request.delete[Option[AgentApplication]]
             for {

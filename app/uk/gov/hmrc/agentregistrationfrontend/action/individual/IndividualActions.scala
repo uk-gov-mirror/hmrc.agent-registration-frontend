@@ -133,7 +133,7 @@ extends RequestAwareLogging:
         .find(linkId)
         .map:
           case Some(agentApplication) if agentApplication.isAfterSentForRisking => request.add[AgentApplication](agentApplication)
-          case Some(agentApplication) => Redirect(AppRoutes.providedetails.CheckYourAnswersController.show(linkId))
+          case Some(_) => Redirect(AppRoutes.providedetails.CheckYourAnswersController.show(linkId))
           case None => Redirect(AppRoutes.providedetails.ExitController.genericExitPage.url)
     )
     .refine(implicit request =>
@@ -162,7 +162,7 @@ extends RequestAwareLogging:
         .find(linkId)
         .map:
           case Some(agentApplication) if agentApplication.isAfterSentForRisking => request.add[AgentApplication](agentApplication)
-          case Some(agentApplication) => Redirect(AppRoutes.providedetails.CheckYourAnswersController.show(linkId))
+          case Some(_) => Redirect(AppRoutes.providedetails.CheckYourAnswersController.show(linkId))
           case None => Redirect(AppRoutes.providedetails.ExitController.genericExitPage.url)
     )
     .refine(implicit request =>

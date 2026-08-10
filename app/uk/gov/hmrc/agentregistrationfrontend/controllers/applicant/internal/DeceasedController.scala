@@ -48,7 +48,7 @@ extends FrontendController(mcc, actions):
     .refine(implicit request =>
       request.agentApplication match
         case a: AgentApplicationSoleTrader => request.add(a)
-        case a: IsNotSoleTrader =>
+        case _: IsNotSoleTrader =>
           logger.debug(s"Deceased verification is required only for SoleTrader, this business type is ${request.agentApplication.businessType}. Redirecting to company status check.")
           Redirect(nextCheckEndpoint)
     )

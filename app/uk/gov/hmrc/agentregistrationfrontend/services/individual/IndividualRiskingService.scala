@@ -24,13 +24,12 @@ import uk.gov.hmrc.agentregistrationfrontend.util.RequestAwareLogging
 
 import javax.inject.Inject
 import javax.inject.Singleton
-import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
 @Singleton
 class IndividualRiskingService @Inject() (
   agentRegistrationRiskingConnector: AgentRegistrationRiskingConnector
-)(using ExecutionContext)
+)
 extends RequestAwareLogging:
 
   def getRiskingProgress(personReference: PersonReference)(using request: RequestHeader): Future[RiskingProgress] = agentRegistrationRiskingConnector

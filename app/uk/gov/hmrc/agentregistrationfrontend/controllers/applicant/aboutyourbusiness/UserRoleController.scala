@@ -40,7 +40,7 @@ extends FrontendController(mcc, actions):
   val baseAction: ActionBuilderWithData[EmptyTuple] = actions.action
     .ensure(
       condition = request => request.readBusinessType.isDefined,
-      resultWhenConditionNotMet = request => Redirect(AppRoutes.apply.aboutyourbusiness.BusinessTypeSessionController.show.url)
+      resultWhenConditionNotMet = _ => Redirect(AppRoutes.apply.aboutyourbusiness.BusinessTypeSessionController.show.url)
     )
 
   def show: Action[?] = baseAction:

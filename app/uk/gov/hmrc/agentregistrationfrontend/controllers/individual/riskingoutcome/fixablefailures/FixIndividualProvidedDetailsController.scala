@@ -49,7 +49,7 @@ extends FrontendController(mcc, actions):
           request.get[RiskingOutcomeApplication] match
             case o: RiskingOutcomeApplication.FailedFixable => o.correctiveActionExpiryDate
             case o: RiskingOutcomeApplication.FailedNonFixable => o.correctiveActionExpiryDate
-            case o: RiskingOutcomeApplication.Approved =>
+            case _: RiskingOutcomeApplication.Approved =>
               throw new IllegalStateException("Individual provided details should not be shown for approved applications.")
 
         Ok(view(

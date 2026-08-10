@@ -52,7 +52,7 @@ extends FrontendController(mcc, actions):
         val riskingOutcomeIndividual: RiskingOutcomeIndividual = request.get
         val entityName: String = request.get[BusinessPartnerRecordResponse].getEntityName
         riskingOutcomeApplication match
-          case applicationOutcome: RiskingOutcomeApplication.FailedNonFixable =>
+          case _: RiskingOutcomeApplication.FailedNonFixable =>
             riskingOutcomeIndividual match
               case individualOutcome: RiskingOutcomeIndividual.FailedNonFixable =>
                 val riskedIndividual: RiskedIndividual = RiskedIndividual(

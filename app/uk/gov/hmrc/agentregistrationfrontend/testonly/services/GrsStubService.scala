@@ -47,7 +47,6 @@ class GrsStubService @Inject() (
         case (SoleTrader, Some(nino: Nino)) =>
           agentsExternalStubsConnector.createIndividualUserForDeceasedCheck(
             nino = nino,
-            assignedPrincipalEnrolments = Seq("HMRC-MTD-IT"),
             deceased = deceased
           )
         case _ => Future.successful(())

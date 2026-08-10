@@ -62,7 +62,7 @@ extends RequestAwareLogging:
         and Retrievals.credentials
         and Retrievals.affinityGroup
     ).apply:
-      case cl ~ allEnrolments ~ maybeInternalId ~ maybeCredentials ~ maybeAffinityGroup =>
+      case cl ~ _ ~ maybeInternalId ~ maybeCredentials ~ maybeAffinityGroup =>
         maybeAffinityGroup match
           case Some(AffinityGroup.Agent) => Future.successful(Left(redirectToNotForAgentPage))
           case Some(AffinityGroup.Individual | AffinityGroup.Organisation) =>

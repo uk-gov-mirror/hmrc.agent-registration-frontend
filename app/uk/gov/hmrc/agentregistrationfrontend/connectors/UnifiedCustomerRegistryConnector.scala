@@ -46,7 +46,7 @@ extends Connector:
       .map: response =>
         response.status match
           case status if is2xx(status) => Some(response.json.as[UcrIdentifiers])
-          case status =>
+          case _ =>
             logger.warn("Failed to get organisation identifiers")
             None
 
@@ -61,7 +61,7 @@ extends Connector:
       .map: response =>
         response.status match
           case status if is2xx(status) => Some(response.json.as[UcrIdentifiers])
-          case status =>
+          case _ =>
             logger.warn("Failed to get individual identifiers by nino")
             None
 
@@ -75,6 +75,6 @@ extends Connector:
       .map: response =>
         response.status match
           case status if is2xx(status) => Some(response.json.as[UcrIdentifiers])
-          case status =>
+          case _ =>
             logger.warn("Failed to get individual identifiers by sa-utr")
             None

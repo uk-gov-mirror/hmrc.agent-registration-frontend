@@ -16,10 +16,12 @@
 
 package uk.gov.hmrc.agentregistrationfrontend.util
 
+import scala.annotation.nowarn
 import scala.compiletime.*
 
 opaque type UniqueTuple[T <: Tuple] <: Tuple = T
 
+@nowarn("msg=unused.*parameter")
 object UniqueTuple:
 
   extension [T <: Tuple](t: T)

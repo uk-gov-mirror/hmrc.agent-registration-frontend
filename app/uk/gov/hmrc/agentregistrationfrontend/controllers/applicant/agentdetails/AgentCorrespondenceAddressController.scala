@@ -145,7 +145,7 @@ extends FrontendController(mcc, actions):
   ): AddressOptions =
     val chroAddressOption: Option[ChroAddress] =
       agentApplication match
-        case a: AgentApplication.IsNotIncorporated => None
+        case _: AgentApplication.IsNotIncorporated => None
         case a: AgentApplication.IsIncorporated =>
           a
             .getCompanyProfile

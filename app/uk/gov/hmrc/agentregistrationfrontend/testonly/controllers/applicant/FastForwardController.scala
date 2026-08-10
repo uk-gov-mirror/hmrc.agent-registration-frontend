@@ -153,7 +153,7 @@ extends FrontendController(mcc, applicantActions):
       createdAt = Instant.now(clock)
     )
     for
-      userIndividual <- stubUserService.createUserIndividual(
+      _ <- stubUserService.createUserIndividual(
         userId = userIdIndividual,
         planetId = planetId,
         name = individualName.value

@@ -56,7 +56,7 @@ extends FrontendController(mcc, actions):
               .get[AgentApplication]
               .riskingOutcomeApplication match
               case Some(outcome: RiskingOutcomeApplication.FailedFixable) => request.add[RiskingOutcomeApplication.FailedFixable](outcome)
-              case outcome =>
+              case _ =>
                 logger.warn("Risking outcome is not fixable. Redirecting to where outcome can be handled.")
                 Redirect(AppRoutes.apply.AgentApplicationController.applicationStatus)
       )

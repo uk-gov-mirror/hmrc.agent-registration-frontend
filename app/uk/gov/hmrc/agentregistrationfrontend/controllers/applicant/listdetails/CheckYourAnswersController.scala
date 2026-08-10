@@ -72,9 +72,9 @@ extends FrontendController(mcc, actions):
       resultWhenConditionNotMet =
         implicit request =>
           request.get[IsNotSoleTrader] match
-            case a: AgentApplication.IsAgentApplicationForDeclaringNumberOfKeyIndividuals =>
+            case _: AgentApplication.IsAgentApplicationForDeclaringNumberOfKeyIndividuals =>
               Redirect(AppRoutes.apply.listdetails.nonincorporated.CheckYourAnswersController.show)
-            case a: AgentApplication.IsIncorporated => Redirect(AppRoutes.apply.listdetails.incoporated.CheckYourAnswersController.show)
+            case _: AgentApplication.IsIncorporated => Redirect(AppRoutes.apply.listdetails.incoporated.CheckYourAnswersController.show)
     )
     .ensure(
       condition =

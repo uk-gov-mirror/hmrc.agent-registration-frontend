@@ -598,8 +598,14 @@ userRole.Partner = Yes, I am a partner in the business
 userRole.Director = Yes, I’m a current officer in Companies House
 userRole.Authorised = No, but I’m authorised by them to set up this account
 userRole.other.signOut = Finish and sign out
-userRole.error.required = Select yes if you are the owner of the business
-userRole.error.invalid = Select yes if you are the owner of the business
+userRole.Owner.error.required = Select yes if you are the owner of the business
+userRole.Owner.error.invalid = Select yes if you are the owner of the business
+userRole.Director.error.required = Select yes if you are a director of the limited company
+userRole.Director.error.invalid = Select yes if you are the owner of the business
+userRole.Partner.error.required = Select yes if you are a partner in the business
+userRole.Partner.error.invalid = Select yes if you are a partner in the business
+userRole.Member.error.required = Select yes if you are a member of the limited liability partnership
+userRole.Member.error.invalid = Select yes if you are a member of the limited liability partnership
 
 # About your application / check your answers
 checkYourAnswer.title = Check your answers

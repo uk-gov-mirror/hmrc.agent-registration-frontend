@@ -27,10 +27,10 @@ object UserRoleForm:
 
   val key: String = "userRole"
 
-  val form: Form[UserRole] =
+  def form(userRoleKey: String): Form[UserRole] =
     val fieldMapping: FieldMapping[UserRole] = Forms.of(FormatterFactory.makeEnumFormatter[UserRole](
-      errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(key),
-      errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(key)
+      errorMessageIfMissing = ErrorKeys.requiredFieldErrorMessage(s"$key.$userRoleKey"),
+      errorMessageIfEnumError = ErrorKeys.invalidInputErrorMessage(s"$key.$userRoleKey")
     ))
     Form(
       mapping = Forms.mapping(key -> fieldMapping)(identity)(Some(_))

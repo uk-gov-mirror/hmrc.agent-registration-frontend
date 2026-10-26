@@ -1577,3 +1577,7 @@ applicationExpired.p3 = Os na fyddwch yn dileu’r cais hwn, byddwn yn ei ddileu
 confirmationOfExpiredDeletion.title = Mae’ch cais wedi cael ei ddileu
 confirmationOfExpiredDeletion.p1 = Mae’r holl wybodaeth a nodwyd gennych wedi’i ddileu oddi ar ein cronfa ddata.
 confirmationOfExpiredDeletion.p2 = Os ydych am wneud cais am gyfrif gwasanaethau asiant o hyd, gallwch ddechrau cais newydd.
+
+# Individual link id application expired
+linkIdApplicationExpired.title = Ni allwch barhau â’r cais hwn
+linkIdApplicationExpired.p1 = Cysylltwch â’r person a anfonodd y cysylltiad atoch.

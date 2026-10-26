@@ -1,0 +1,55 @@
+@*
+ * Copyright 2025 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import play.api.mvc.RequestHeader
+@import play.api.i18n.Messages
+@import uk.gov.hmrc.play.bootstrap.binders.RedirectUrl
+@import uk.gov.hmrc.agentregistrationfrontend.views.html.Layout
+@import uk.gov.hmrc.agentregistrationfrontend.config.AppConfig
+@import uk.gov.hmrc.agentregistrationfrontend.util.RequestSupport.isSignedIn
+@import uk.gov.hmrc.agentregistration.shared.LinkId
+
+@this(
+        layout: Layout,
+        appConfig: AppConfig
+)
+
+@(linkId: LinkId)(implicit
+        request: RequestHeader,
+        messages: Messages
+)
+
+@key = @{"linkIdApplicationExpired"}
+@h1 = @{messages(s"$key.title")}
+
+@layout(
+  pageTitle = h1,
+  suppressBackLink = true
+) {
+  <h1 class="govuk-heading-l">@h1</h1>
+  <p class="govuk-body">
+    @messages(s"$key.p1")
+  </p>
+  @if(isSignedIn) {
+    <p class="govuk-body govuk-!-display-none-print">
+      <a class="govuk-link" href="@{
+        AppRoutes.SignOutController.signOutWithContinue(continueUrl = RedirectUrl(appConfig.thisFrontendBaseUrl + AppRoutes.SignOutController.individualSignedOut(linkId).url))
+      }">@{
+        messages("common.finishAndSignOut")
+      }</a>
+    </p>
+  }
+}

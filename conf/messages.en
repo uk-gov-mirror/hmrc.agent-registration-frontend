@@ -1886,3 +1886,7 @@ applicationExpired.p3 = If you do not delete this application, we will delete it
 confirmationOfExpiredDeletion.title = Your application has been deleted
 confirmationOfExpiredDeletion.p1 = All the information you entered has been removed from our database.
 confirmationOfExpiredDeletion.p2 = If you still want to apply for an agent services account, you can start a new application.
+
+# Individual link id application expired
+linkIdApplicationExpired.title = Application has expired
+linkIdApplicationExpired.p1 = Contact the person who sent you the link.

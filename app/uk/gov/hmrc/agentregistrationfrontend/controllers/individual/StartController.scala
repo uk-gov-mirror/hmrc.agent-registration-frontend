@@ -21,9 +21,11 @@ import play.api.mvc.AnyContent
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.agentregistration.shared.ApplicationState
 import uk.gov.hmrc.agentregistration.shared.LinkId
+import uk.gov.hmrc.agentregistration.shared.util.SafeEquals.===
 import uk.gov.hmrc.agentregistrationfrontend.action.individual.IndividualActions
 import uk.gov.hmrc.agentregistrationfrontend.services.applicant.AgentApplicationService
 import uk.gov.hmrc.agentregistrationfrontend.views.html.individual.StartPage
+import uk.gov.hmrc.agentregistrationfrontend.views.html.individual.ExpiredApplicationPage
 import uk.gov.hmrc.agentregistrationfrontend.views.html.individual.riskingoutcome.OutcomeStartPage
 
 import java.time.Instant
@@ -38,6 +40,7 @@ class StartController @Inject(
   mcc: MessagesControllerComponents,
   startPage: StartPage,
   outcomeStartPage: OutcomeStartPage,
+  expiredPage: ExpiredApplicationPage,
   applicationService: AgentApplicationService
 )
 extends FrontendController(mcc, actions):
@@ -53,7 +56,13 @@ extends FrontendController(mcc, actions):
                 Ok(outcomeStartPage(
                   linkId: LinkId
                 ))
+              case ApplicationState.Expired =>
+                logger.info(s"Application for linkId $linkId has expired")
+                Ok(expiredPage(linkId))
               case _ => Redirect(AppRoutes.providedetails.CheckYourAnswersController.show(linkId)) // this case will only ever be for first time submissions, RiskingCompleted is the status for resubmissions
+          case Some(expiredApplication) if expiredApplication.applicationState === ApplicationState.Expired =>
+            logger.info(s"Application for linkId $linkId has expired")
+            Ok(expiredPage(linkId))
           case Some(agentApplication) =>
             val applicationExpiryInstant: Instant = agentApplication
               .applicationExpiresAt

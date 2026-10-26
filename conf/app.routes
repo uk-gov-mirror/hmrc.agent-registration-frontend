@@ -183,7 +183,8 @@ POST        /apply/agent-declaration/confirm-declaration            uk.gov.hmrc.
 GET         /details-already-provided                               uk.gov.hmrc.agentregistrationfrontend.controllers.individual.ExitController.detailsAlreadyProvided
 GET         /provide-details/exit                                   uk.gov.hmrc.agentregistrationfrontend.controllers.individual.ExitController.genericExitPage
 GET         /provide-details/start/:linkId                          uk.gov.hmrc.agentregistrationfrontend.controllers.individual.StartController.start(linkId: LinkId)
-
+GET         /provide-details/sign-out/:linkId                      uk.gov.hmrc.agentregistrationfrontend.controllers.SignOutController.individualSignOut(linkId: LinkId)
+GET         /provide-details/signed-out/:linkId                    uk.gov.hmrc.agentregistrationfrontend.controllers.SignOutController.individualSignedOut(linkId: LinkId)
 GET         /provide-details/match-application/:linkId             uk.gov.hmrc.agentregistrationfrontend.controllers.individual.MatchIndividualProvidedDetailsController.show(linkId: LinkId, fromIv: Option[Boolean])
 POST        /provide-details/match-application/:linkId             uk.gov.hmrc.agentregistrationfrontend.controllers.individual.MatchIndividualProvidedDetailsController.submit(linkId: LinkId, fromIv: Option[Boolean])
 

@@ -20,6 +20,7 @@ import play.api.mvc.*
 import play.api.mvc.Results.NotFound
 import play.api.mvc.Results.Redirect
 import uk.gov.hmrc.agentregistration.shared.AgentApplication
+import uk.gov.hmrc.agentregistration.shared.ApplicationState
 import uk.gov.hmrc.agentregistration.shared.BusinessPartnerRecordResponse
 import uk.gov.hmrc.agentregistration.shared.InternalUserId
 import uk.gov.hmrc.agentregistration.shared.LinkId
@@ -109,6 +110,9 @@ extends RequestAwareLogging:
       agentApplicationService
         .find(linkId)
         .map:
+          case Some(agentApplication) if agentApplication.applicationState === ApplicationState.Expired =>
+            logger.info(s"User has entered application at deep url and application for linkId $linkId has expired, redirecting to start where expired is handled.")
+            Redirect(AppRoutes.providedetails.StartController.start(linkId))
           case Some(agentApplication) if agentApplication.riskingOutcomeApplication.isDefined =>
             Redirect(AppRoutes.providedetails.riskingoutcome.RiskingOutcomeController.show(linkId))
           case Some(agentApplication) => request.add[AgentApplication](agentApplication)

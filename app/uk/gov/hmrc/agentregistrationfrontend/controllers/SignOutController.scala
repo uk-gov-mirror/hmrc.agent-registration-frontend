@@ -21,6 +21,8 @@ import play.api.mvc.AnyContent
 import play.api.mvc.DefaultActionBuilder
 import play.api.mvc.MessagesControllerComponents
 import sttp.model.Uri.UriContext
+import uk.gov.hmrc.agentregistration.shared.LinkId
+import uk.gov.hmrc.agentregistrationfrontend.views.html.individual.IndividualSignedOutPage
 import uk.gov.hmrc.agentregistrationfrontend.config.AppConfig
 import uk.gov.hmrc.agentregistrationfrontend.util.RequestSupport.validateRedirectUrl
 import uk.gov.hmrc.agentregistrationfrontend.views.html.SignedOutPage
@@ -35,6 +37,7 @@ class SignOutController @Inject() (
   mcc: MessagesControllerComponents,
   defaultActionBuilder: DefaultActionBuilder,
   signedOutPage: SignedOutPage,
+  individualSignedOutPage: IndividualSignedOutPage,
   timedOutPage: TimedOutPage,
   appConfig: AppConfig
 )
@@ -60,3 +63,11 @@ extends FrontendControllerBase(mcc):
   def timedOut: Action[AnyContent] = defaultActionBuilder:
     implicit request =>
       Ok(timedOutPage())
+
+  def individualSignOut(linkId: LinkId): Action[AnyContent] = defaultActionBuilder:
+    val continueUrl = uri"${appConfig.thisFrontendBaseUrl + AppRoutes.providedetails.StartController.start(linkId).url}"
+    Redirect(AppRoutes.SignOutController.signOutWithContinue(RedirectUrl(continueUrl.toString)))
+
+  def individualSignedOut(linkId: LinkId): Action[AnyContent] = defaultActionBuilder:
+    implicit request =>
+      Ok(individualSignedOutPage(linkId))

@@ -46,6 +46,13 @@ extends ControllerSpec:
     val riskingComplete: AgentApplication = complete
       .modify(_.applicationState)
       .setTo(ApplicationState.RiskingCompleted)
+    val expired: AgentApplication = inComplete
+      .modify(_.applicationState)
+      .setTo(ApplicationState.Expired)
+      .modify(_.expiredAt)
+      .setTo(Some(tdAll.nowAsInstant))
+      .modify(_.postExpiryGracePeriodEndsAt)
+      .setTo(Some(tdAll.nowAsInstant.plusSeconds(3600 * 24 * 45)))
 
   "routes should have correct paths and methods" in:
     AppRoutes.providedetails.StartController.start(linkId) shouldBe Call(
@@ -73,4 +80,11 @@ extends ControllerSpec:
     val response: WSResponse = get(path)
     response.status shouldBe Status.OK
     response.parseBodyAsJsoupDocument.title() shouldBe "Sign in to see the outcome of the application - Apply for an agent services account - GOV.UK"
+    AgentRegistrationStubs.verifyFindApplicationByLinkId(linkId = linkId)
+
+  s"GET $path with expired application should return 200 and render the expired page" in:
+    AgentRegistrationStubs.stubFindApplicationByLinkId(linkId = linkId, agentApplication = agentApplication.expired)
+    val response: WSResponse = get(path)
+    response.status shouldBe Status.OK
+    response.parseBodyAsJsoupDocument.title() shouldBe "Application has expired - Apply for an agent services account - GOV.UK"
     AgentRegistrationStubs.verifyFindApplicationByLinkId(linkId = linkId)
